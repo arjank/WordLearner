@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="phrase")
  */
-class Phrase {
-
+class Phrase
+{
     /**
      * @var int
      *
@@ -41,6 +41,13 @@ class Phrase {
      * @ORM\Column(type="string", name="in_second_language")
      */
     private $inSecondLanguage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="remark")
+     */
+    private $remark;
 
     /**
      * @return Chapter
@@ -106,5 +113,19 @@ class Phrase {
         $this->inSecondLanguage = $inSecondLanguage;
     }
 
+    /**
+     * @return string
+     */
+    public function getRemark()
+    {
+        return $this->remark;
+    }
 
+    /**
+     * @param string $remark
+     */
+    public function setRemark($remark)
+    {
+        $this->remark = $remark;
+    }
 }

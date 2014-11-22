@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="chapter")
  */
-class Chapter {
-
+class Chapter
+{
     /**
      * @var int
      *
@@ -105,6 +105,4 @@ class Chapter {
     {
         $this->title = $title;
     }
-
-
 }

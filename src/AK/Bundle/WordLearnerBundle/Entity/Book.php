@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AK\Bundle\WordLearnerBundle\Repository\BookRepository")
  * @ORM\Table(name="book")
  */
-class Book {
-
+class Book
+{
     /**
      * @var int
      *
@@ -128,6 +128,4 @@ class Book {
     {
         $this->secondLanguage = $secondLanguage;
     }
-
-
 }
