@@ -63,8 +63,13 @@ class ConfiguratorTest extends \PHPUnit_Framework_TestCase
             ->with('ROLE_SUPER_ADMIN')
             ->will($this->returnValue(true));
 
-        $filterCollection->expects($this->exactly(0))
-            ->method('enable');
+        $filterCollection->expects($this->exactly(1))
+            ->method('enable')
+            ->with(Configurator::FILTER_BOOK_FILTER);
+
+        $filterCollection->expects($this->exactly(1))
+            ->method('disable')
+            ->with(Configurator::FILTER_BOOK_FILTER);
 
         $configurator->onKernelRequest();
     }
@@ -114,22 +119,14 @@ class ConfiguratorTest extends \PHPUnit_Framework_TestCase
         $entityManager = $this->entityManager;
 
         $securityContext = $this->securityContext;
-        $token = $this->getMockToken();
-        $userId = 5;
-        $user = $this->getMockUser($userId);
         $filterCollection = $this->filterCollection;
         $filter = $this->getMockFilter($entityManager);
 
-        $token->expects($this->exactly(1))
-            ->method('getUser')
-            ->will($this->returnValue(null));
         $securityContext->expects($this->exactly(1))
             ->method('getToken')
-            ->will($this->returnValue($token));
-        $securityContext->expects($this->any())
-            ->method('isGranted')
-            ->with('ROLE_SUPER_ADMIN')
-            ->will($this->returnValue(false));
+            ->will($this->returnValue(null));
+        $securityContext->expects($this->exactly(0))
+            ->method('isGranted');
 
         $filterCollection->expects($this->exactly(1))
             ->method('enable')

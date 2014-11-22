@@ -25,14 +25,16 @@ class Configurator
     {
         $user = $this->getUser();
         $em = $this->em;
-        if ($this->securityContext->isGranted('ROLE_SUPER_ADMIN') === false) {
-            // Don't enable filters for super admin
-            $filter = $em->getFilters()->enable(self::FILTER_BOOK_FILTER);
-            if ($user instanceof UserInterface) {
-                $filter->setParameter('user_id', $user->getId());
+        $filter = $em->getFilters()->enable(self::FILTER_BOOK_FILTER);
+        if ($user instanceof UserInterface) {
+            if ($this->securityContext->isGranted('ROLE_SUPER_ADMIN') === true) {
+                // super admin does not need filters
+                $em->getFilters()->disable(self::FILTER_BOOK_FILTER);
             } else {
-                $filter->setParameter('user_id', 0);
+                $filter->setParameter('user_id', $user->getId());
             }
+        } else {
+            $filter->setParameter('user_id', 0);
         }
     }
 
