@@ -1,0 +1,8 @@
+services:
+    akwordlearner.doctrine.filter.configurator:
+        class: AK\Bundle\WordLearnerBundle\Filter\Configurator
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @security.context
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
