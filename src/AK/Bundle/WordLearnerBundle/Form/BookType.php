@@ -17,8 +17,8 @@ class BookType extends AbstractType
         $builder
             ->add('id', 'hidden')
             ->add('title')
-            ->add('fromLanguage')
-            ->add('toLanguage')
+            ->add('firstLanguage')
+            ->add('secondLanguage')
         ;
     }
     

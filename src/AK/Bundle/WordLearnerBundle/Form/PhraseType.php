@@ -15,13 +15,13 @@ class PhraseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'hidden')
             ->add('inFirstLanguage')
             ->add('inSecondLanguage')
+            ->add('remarkFirstLanguage')
             ->add('chapter')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

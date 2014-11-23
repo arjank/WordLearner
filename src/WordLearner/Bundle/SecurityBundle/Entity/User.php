@@ -3,6 +3,7 @@
 namespace WordLearner\Bundle\SecurityBundle\Entity;
 
 use AK\Bundle\WordLearnerBundle\Entity\Book;
+use Doctrine\ORM\PersistentCollection;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class User
  *
  * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
 {
@@ -34,21 +35,10 @@ class User extends BaseUser
     protected $books;
 
     /**
-     * @return \AK\Bundle\WordLearnerBundle\Entity\Book[]
+     * @return \AK\Bundle\WordLearnerBundle\Entity\Book[]|PersistentCollection
      */
     public function getBooks()
     {
         return $this->books;
     }
-
-    /**
-     * @param \AK\Bundle\WordLearnerBundle\Entity\Book[] $books
-     */
-    public function setBooks($books)
-    {
-        $this->books = $books;
-    }
-
-
-
 }

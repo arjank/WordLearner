@@ -2,6 +2,7 @@
 
 namespace AK\Bundle\WordLearnerBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AK\Bundle\WordLearnerBundle\Entity\Book;
 use AK\Bundle\WordLearnerBundle\Form\BookType;
+use WordLearner\Bundle\SecurityBundle\Entity\User;
 
 /**
  * Book controller.
@@ -27,6 +29,7 @@ class BookController extends Controller
      */
     public function indexAction()
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AKWordLearnerBundle:Book')->findAll();
@@ -49,8 +52,12 @@ class BookController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            /** @var User $user */
+            $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
+            $user->getBooks()->add($entity);
             $em->persist($entity);
+            $em->persist($user);
             $em->flush();
 
             return $this->redirect($this->generateUrl('book_show', array('id' => $entity->getId())));

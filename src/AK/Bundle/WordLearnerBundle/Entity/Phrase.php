@@ -45,9 +45,16 @@ class Phrase
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="remark")
+     * @ORM\Column(type="string", name="remark_first_language")
      */
-    private $remark;
+    private $remarkFirstLanguage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="remark_second_language")
+     */
+    private $remarkSecondLanguage;
 
     /**
      * @return Chapter
@@ -116,16 +123,32 @@ class Phrase
     /**
      * @return string
      */
-    public function getRemark()
+    public function getRemarkFirstLanguage()
     {
-        return $this->remark;
+        return $this->remarkFirstLanguage;
     }
 
     /**
-     * @param string $remark
+     * @param string $remarkFirstLanguage
      */
-    public function setRemark($remark)
+    public function setRemarkFirstLanguage($remarkFirstLanguage)
     {
-        $this->remark = $remark;
+        $this->remarkFirstLanguage = $remarkFirstLanguage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRemarkSecondLanguage()
+    {
+        return $this->remarkSecondLanguage;
+    }
+
+    /**
+     * @param string $remarkSecondLanguage
+     */
+    public function setRemarkSecondLanguage($remarkSecondLanguage)
+    {
+        $this->remarkSecondLanguage = $remarkSecondLanguage;
     }
 }

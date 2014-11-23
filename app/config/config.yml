@@ -28,15 +28,20 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources: ['bootstrap_3_horizontal_layout.html.twig']
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:
+        - AKWordLearnerBundle
+
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
+        scssphp: ~
         #closure:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:
@@ -62,6 +67,10 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        filters:
+            book_filter:
+                class: AK\Bundle\WordLearnerBundle\Filter\BookFilter
+                enabled: false
 
 # Swiftmailer Configuration
 swiftmailer:
