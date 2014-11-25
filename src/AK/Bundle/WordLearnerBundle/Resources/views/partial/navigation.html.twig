@@ -10,12 +10,7 @@
             <a href="#" class="navbar-brand">{{ 'app.name'|trans }}</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="{{ path('book') }}">Books</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            {{ knp_menu_render('AKWordLearnerBundle:Builder:mainMenu', {'currentClass': 'active'}) }}
         </div><!--/.nav-collapse -->
     </div>
 </nav>
