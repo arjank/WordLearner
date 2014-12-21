@@ -2,6 +2,7 @@
 
 namespace AK\Bundle\WordLearnerBundle\Controller;
 
+use AK\Bundle\WordLearnerBundle\Entity\Chapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -84,13 +85,18 @@ class PhraseController extends Controller
     /**
      * Displays a form to create a new Phrase entity.
      *
-     * @Route("/new", name="phrase_new")
+     * @param Chapter $chapter
+     *
+     * @return array
+     *
+     * @Route("/new/{chapter}", name="phrase_new", defaults={"chapter"=null})
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction(Chapter $chapter = null)
     {
         $entity = new Phrase();
+        $entity->setChapter($chapter);
         $form   = $this->createCreateForm($entity);
 
         return array(

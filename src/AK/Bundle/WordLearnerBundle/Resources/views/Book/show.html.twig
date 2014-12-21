@@ -1,28 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Book</h1>
+    <h1>{{ book.title }}</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ entity.title }}</td>
-            </tr>
-            <tr>
-                <th>Firstlanguage</th>
-                <td>{{ entity.firstLanguage }}</td>
-            </tr>
-            <tr>
-                <th>Secondlanguage</th>
-                <td>{{ entity.secondLanguage }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {{ book.firstLanguage }} - {{ book.secondLanguage }}
+
+    <h2>{{ 'chapters'|trans }}</h2>
+
+    <ul>
+    {% for chapter in book.chapters %}
+        <li><a href="{{ path('book_chapter', {'book_id': book.id, 'chapter_id': chapter.id}) }}">{{ chapter.title }}</a></li>
+    {% endfor %}
+    </ul>
 
         <ul class="record_actions">
     <li>
@@ -31,7 +20,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ path('book_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('book_edit', { 'id': book.id }) }}">
             Edit
         </a>
     </li>

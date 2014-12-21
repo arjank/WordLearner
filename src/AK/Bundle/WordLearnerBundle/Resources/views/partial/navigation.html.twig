@@ -10,7 +10,8 @@
             <a href="#" class="navbar-brand">{{ 'app.name'|trans }}</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
-            {{ knp_menu_render('AKWordLearnerBundle:Builder:mainMenu', {'currentClass': 'active'}) }}
+            {% set menu = knp_menu_get('AKWordLearnerBundle:Builder:mainMenu', [], {}) %}
+            {{ knp_menu_render(menu, {'currentClass': 'active'}) }}
         </div><!--/.nav-collapse -->
     </div>
 </nav>

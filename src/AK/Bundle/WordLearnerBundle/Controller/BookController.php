@@ -118,7 +118,7 @@ class BookController extends Controller
         $deleteForm = $this->createDeleteForm($book->getId());
 
         return array(
-            'entity'      => $book,
+            'book'      => $book,
             'delete_form' => $deleteForm->createView(),
         );
     }

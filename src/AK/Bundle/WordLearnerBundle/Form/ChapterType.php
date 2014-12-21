@@ -17,20 +17,20 @@ class ChapterType extends AbstractType
     {
         $builder
             ->add('id', 'hidden')
-            ->add('title')
             ->add('book', 'entity', [
                 'class' => 'AKWordLearnerBundle:Book',
                 'property' => 'title',
-                'query_builder' => function(BookRepository $repo){
+                'query_builder' => function(BookRepository $repo) {
                     $qb = $repo->createQueryBuilder('book');
 //                    $qb->select('book.id, book.title');
                     $qb->orderBy('book.title', 'ASC');
                     return $qb;
                 }
             ])
+            ->add('title')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -43,14 +43,15 @@ class Book
     private $secondLanguage;
 
     /**
-     * @var Chapter[]
+     * @var Chapter[]|\Doctrine\ORM\PersistentCollection
      *
      * @ORM\OneToMany(targetEntity="Chapter", mappedBy="book")
+     * @ORM\OrderBy({"title" = "ASC"})
      */
     private $chapters;
 
     /**
-     * @return Chapter[]
+     * @return Chapter[]|\Doctrine\ORM\PersistentCollection
      */
     public function getChapters()
     {

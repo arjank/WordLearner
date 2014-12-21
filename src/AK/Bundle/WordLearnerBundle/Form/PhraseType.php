@@ -2,6 +2,7 @@
 
 namespace AK\Bundle\WordLearnerBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,10 +16,18 @@ class PhraseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('chapter', 'entity', array(
+                'class' => 'AKWordLearnerBundle:Chapter',
+                'property' => 'title',
+                'query_builder' => function(EntityRepository $repo) {
+                    $qb = $repo->createQueryBuilder('chapter');
+                    $qb->orderBy('chapter.title', 'ASC');
+                    return $qb;
+                }
+            ))
             ->add('inFirstLanguage')
             ->add('inSecondLanguage')
             ->add('remarkFirstLanguage')
-            ->add('chapter')
         ;
     }
 
