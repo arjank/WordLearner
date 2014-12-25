@@ -1,0 +1,8 @@
+services:
+    twig.extension.parent_template:
+        class: AK\TwigExtensionsBundle\Twig\ParentTemplateExtension
+        arguments:
+            - %ak_twig_extensions.parent_templates%
+            - @service_container
+        tags:
+            - {name: twig.extension}

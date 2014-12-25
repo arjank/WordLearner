@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new WordLearner\Bundle\SecurityBundle\WordLearnerSecurityBundle(),
             new AK\Bundle\WordLearnerBundle\AKWordLearnerBundle(),
+            new AK\TwigExtensionsBundle\AKTwigExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
