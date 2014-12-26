@@ -114,4 +114,7 @@ fos_user:
     firewall_name: main
     user_class: WordLearner\Bundle\SecurityBundle\Entity\User
 
-ak_twig_extensions: ~
+ak_twig_extensions:
+    parent_templates:
+        main: '::layout.html.twig'
+        ajax: '::ajax.html.twig'
