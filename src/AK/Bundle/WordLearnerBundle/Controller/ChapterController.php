@@ -102,24 +102,20 @@ class ChapterController extends Controller
     /**
      * Finds and displays a Chapter entity.
      *
+     * @param Chapter $chapter
+     *
      * @Route("/{id}", name="chapter_show")
      * @Method("GET")
      * @Template()
+     *
+     * @return array
      */
-    public function showAction($id)
+    public function showAction(Chapter $chapter)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AKWordLearnerBundle:Chapter')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Chapter entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($chapter->getId());
 
         return array(
-            'entity'      => $entity,
+            'chapter'      => $chapter,
             'delete_form' => $deleteForm->createView(),
         );
     }

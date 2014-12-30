@@ -39,6 +39,7 @@ class Chapter
      * @var Phrase[]
      *
      * @ORM\OneToMany(targetEntity="Phrase", mappedBy="chapter")
+     * @ORM\OrderBy({"id"="ASC"})
      */
     private $phrases;
 

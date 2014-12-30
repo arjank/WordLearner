@@ -32,10 +32,10 @@ class BookController extends Controller
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AKWordLearnerBundle:Book')->findAll();
+        $books = $em->getRepository('AKWordLearnerBundle:Book')->findAll();
 
         return array(
-            'entities' => $entities,
+            'books' => $books,
         );
     }
     /**

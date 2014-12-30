@@ -45,14 +45,14 @@ class Phrase
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="remark_first_language")
+     * @ORM\Column(type="string", name="remark_first_language", nullable=true)
      */
     private $remarkFirstLanguage;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", name="remark_second_language")
+     * @ORM\Column(type="string", name="remark_second_language", nullable=true)
      */
     private $remarkSecondLanguage;
 

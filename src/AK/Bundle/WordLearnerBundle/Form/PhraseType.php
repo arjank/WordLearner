@@ -2,6 +2,8 @@
 
 namespace AK\Bundle\WordLearnerBundle\Form;
 
+use AK\Bundle\WordLearnerBundle\Entity\Chapter;
+use AK\Bundle\WordLearnerBundle\Entity\Phrase;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +17,18 @@ class PhraseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $firstLanguage = null;
+        $secondLanguage = null;
+
+        /** @var Phrase $data */
+        $data = $builder->getData();
+        $chapter = $data->getChapter();
+
+        if ($chapter instanceof Chapter) {
+            $firstLanguage = $chapter->getBook()->getFirstLanguage();
+            $secondLanguage = $chapter->getBook()->getSecondLanguage();
+        }
+
         $builder
             ->add('chapter', 'entity', array(
                 'class' => 'AKWordLearnerBundle:Chapter',
@@ -25,9 +39,10 @@ class PhraseType extends AbstractType
                     return $qb;
                 }
             ))
-            ->add('inFirstLanguage')
-            ->add('inSecondLanguage')
+            ->add('inFirstLanguage', null, ['label' => $firstLanguage])
             ->add('remarkFirstLanguage')
+            ->add('inSecondLanguage', null, ['label' => $secondLanguage])
+            ->add('remarkSecondLanguage')
         ;
     }
 
@@ -37,7 +52,7 @@ class PhraseType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AK\Bundle\WordLearnerBundle\Entity\Phrase'
+            'data_class' => Phrase::class
         ));
     }
 

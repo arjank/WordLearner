@@ -1,20 +1,26 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Chapter</h1>
+    <h1>{{ chapter.title }}</h1>
 
-    <table class="record_properties">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ chapter.book.firstLanguage }}</th>
+            <th>{{ chapter.book.secondLanguage }}</th>
+        </tr>
+        </thead>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ entity.title }}</td>
-            </tr>
+        {% for phrase in chapter.phrases %}
+        <tr>
+            <td>{{ phrase.inFirstLanguage }}</td>
+            <td>{{ phrase.inSecondLanguage }}</td>
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
+
+    <a href="{{ path('phrase_new', { 'chapter': chapter.id }) }}" data-toggle="modal" data-target="#myModal" class="btn btn-default">Add word</a>
 
         <ul class="record_actions">
     <li>
@@ -23,10 +29,32 @@
         </a>
     </li>
     <li>
-        <a href="{{ path('chapter_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('chapter_edit', { 'id': chapter.id }) }}">
             Edit
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal title</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body"><div class="te"></div></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
 {% endblock %}

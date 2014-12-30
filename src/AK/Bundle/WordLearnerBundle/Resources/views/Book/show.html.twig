@@ -7,11 +7,26 @@
 
     <h2>{{ 'chapters'|trans }}</h2>
 
-    <ul>
-    {% for chapter in book.chapters %}
-        <li><a href="{{ path('book_chapter', {'book_id': book.id, 'chapter_id': chapter.id}) }}">{{ chapter.title }}</a></li>
-    {% endfor %}
-    </ul>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th># Phrases</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chapter in book.chapters %}
+            <tr>
+                <th></th>
+                <td><a href="{{ path('chapter_show', {'id': chapter.id}) }}">{{ chapter.title }}</a></td>
+                <td>{{ chapter.phrases.count }}</td>
+                <td><a href="{{ path('chapter_edit', {'id': chapter.id}) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
         <ul class="record_actions">
     <li>
