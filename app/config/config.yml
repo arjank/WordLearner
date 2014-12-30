@@ -116,5 +116,5 @@ fos_user:
 
 ak_twig_extensions:
     parent_templates:
-        main: '::layout.html.twig'
+        main: '::base.html.twig'
         ajax: '::ajax.html.twig'
