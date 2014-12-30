@@ -3,6 +3,6 @@ services:
         class: AK\TwigExtensionsBundle\Twig\ParentTemplateExtension
         arguments:
             - %ak_twig_extensions.parent_templates%
-            - @service_container
+            - @?request
         tags:
             - {name: twig.extension}

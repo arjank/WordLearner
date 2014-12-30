@@ -2,7 +2,6 @@
 
 namespace AK\TwigExtensionsBundle\Twig;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -21,14 +20,10 @@ class ParentTemplateExtension extends \Twig_Extension
 
     /**
      * @param array $templates
-     * @param ContainerInterface $container
+     * @param Request|null $request
      */
-    public function __construct(array $templates, ContainerInterface $container)
+    public function __construct(array $templates, Request $request = null)
     {
-        $request = null;
-        if ($container->has('request')) {
-            $request = $container->get('request');
-        }
         $this->request = $request;
         $this->templates = $templates;
     }
@@ -43,6 +38,11 @@ class ParentTemplateExtension extends \Twig_Extension
         );
     }
 
+    /**
+     * Returns the name of the template to use
+     *
+     * @return string
+     */
     public function getParentTemplate()
     {
         $result = $this->templates['main'];
@@ -53,6 +53,9 @@ class ParentTemplateExtension extends \Twig_Extension
         return $result;
     }
 
+    /**
+     * @return bool
+     */
     private function useAjaxTemplate()
     {
         $result = false;
