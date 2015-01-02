@@ -24,19 +24,21 @@ class BookFilter extends SQLFilter
      */
     public function addFilterConstraint(ClassMetadata $targetEntity, $alias)
     {
-        $constraint = '';
         $entityName = $targetEntity->getName();
-        $userId = $this->getParameter('user_id');
+        // We cannot be sure that user_id has been set, so we cannot retrieve it here.
 
         switch ($entityName) {
             case Book::class:
+                $userId = $this->getParameter('user_id');
                 $constraint = $alias . '.id IN (SELECT book_id FROM users_books WHERE user_id = ' . $userId . ')';
                 break;
             case Chapter::class:
+                $userId = $this->getParameter('user_id');
                 $constraint = $alias . '.book_id IN (SELECT book_id FROM users_books WHERE user_id = ' . $userId . ')';
                 break;
             default:
-                // No need to change the constraint
+                $constraint = '';
+                break;
         }
 
         return $constraint;
