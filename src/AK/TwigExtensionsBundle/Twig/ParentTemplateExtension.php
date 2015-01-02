@@ -3,6 +3,7 @@
 namespace AK\TwigExtensionsBundle\Twig;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class ParentTemplateExtension
@@ -20,12 +21,20 @@ class ParentTemplateExtension extends \Twig_Extension
 
     /**
      * @param array $templates
-     * @param Request|null $request
      */
-    public function __construct(array $templates, Request $request = null)
+    public function __construct(array $templates)
     {
-        $this->request = $request;
         $this->templates = $templates;
+    }
+
+    /**
+     * Sets the current request from the given request stack.
+     *
+     * @param RequestStack $requestStack
+     */
+    public function setRequest(RequestStack $requestStack)
+    {
+        $this->request = $requestStack->getCurrentRequest();
     }
 
     /**
