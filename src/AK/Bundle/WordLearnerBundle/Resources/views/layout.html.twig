@@ -11,12 +11,6 @@
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 
-    {% javascripts "@jquery" "@bootstrap_js" %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
-    {% block stylesheets %}{% endblock %}
-
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
@@ -24,6 +18,10 @@
     <div class="container">
         {% block body %}{% endblock %}
     </div>
-    {% block javascripts %}{% endblock %}
+
+    {% javascripts "@jquery" "@bootstrap_js" "@AKWordLearnerBundle/Resources/public/js/modal.js" %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
 </body>
 </html>

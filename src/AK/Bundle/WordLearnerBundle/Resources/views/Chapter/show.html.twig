@@ -7,20 +7,25 @@
         <thead>
         <tr>
             <th>{{ chapter.book.firstLanguage }}</th>
+            <th></th>
             <th>{{ chapter.book.secondLanguage }}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for phrase in chapter.phrases %}
         <tr>
             <td>{{ phrase.inFirstLanguage }}</td>
+            <td>{{ phrase.remarkFirstLanguage }}</td>
             <td>{{ phrase.inSecondLanguage }}</td>
+            <td>{{ phrase.remarkSecondLanguage }}</td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('phrase_new', { 'chapter': chapter.id }) }}" data-toggle="modal" data-target="#myModal" class="btn btn-default">Add word</a>
+    {#<a href="{{ path('phrase_new', { 'chapter': chapter.id }) }}" data-target="#myModal" class="btn btn-default modal-ajax">Add word</a>#}
 
         <ul class="record_actions">
     <li>

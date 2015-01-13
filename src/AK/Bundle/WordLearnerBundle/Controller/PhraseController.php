@@ -3,6 +3,7 @@
 namespace AK\Bundle\WordLearnerBundle\Controller;
 
 use AK\Bundle\WordLearnerBundle\Entity\Chapter;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -54,13 +55,22 @@ class PhraseController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('phrase_show', array('id' => $entity->getId())));
+            $button = $form->get('create_and_new');
+            if ($button instanceof ClickableInterface && $button->isClicked()) {
+                $route = $this->generateUrl('phrase_new', ['chapter' => $entity->getChapter()->getId()]);
+            } else {
+                $route = $this->generateUrl('phrase_show', ['id' => $entity->getId()]);
+            }
+
+            $result = $this->redirect($route);
+        } else {
+            $result = array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            );
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return $result;
     }
 
     /**
@@ -77,7 +87,8 @@ class PhraseController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('create', 'submit', array('label' => 'Create'));
+        $form->add('create_and_new', 'submit', array('label' => 'Create and new'));
 
         return $form;
     }
