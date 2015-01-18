@@ -19,7 +19,12 @@
         {% block body %}{% endblock %}
     </div>
 
-    {% javascripts "@jquery" "@bootstrap_js" "@AKWordLearnerBundle/Resources/public/js/modal.js" %}
+    {% javascripts
+        "@jquery"
+        "@bootstrap_js"
+        "@AKWordLearnerBundle/Resources/public/js/modal.js"
+        "@AKWordLearnerBundle/Resources/public/js/script.js"
+    %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 

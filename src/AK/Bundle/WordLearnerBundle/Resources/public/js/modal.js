@@ -1,9 +1,17 @@
-(function ($) {
-    var $modal = $('.modal-content');
+(function (root, $) {
 
-    $modal.on('click', "[type='submit']", function(event){
-        event.preventDefault();
-        var $button = $(event.target);
-        console.log($button.parents('form').serialize());
-    });
-}(jQuery));
+    function init(container, actionItems) {
+        var $modal = $(container);
+
+        $modal.on('click', actionItems, function(event){
+            event.preventDefault();
+            var $button = $(event.target);
+            console.log($button.parents('form').serialize());
+        });
+    }
+
+    root.WLModal = {
+        init: init
+    };
+
+}(window, jQuery));
