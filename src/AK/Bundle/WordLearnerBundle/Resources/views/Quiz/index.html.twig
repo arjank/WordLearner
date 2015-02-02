@@ -1,0 +1,51 @@
+{% extends parent_template() %}
+
+{% if not reversed %}
+    {% set firstLanguage = chapter.book.firstLanguage %}
+    {% set secondLanguage = chapter.book.secondLanguage %}
+{% else %}
+    {% set firstLanguage = chapter.book.secondLanguage %}
+    {% set secondLanguage = chapter.book.firstLanguage %}
+{% endif %}
+
+{% block body %}
+    <h2>{{ chapter.title }}</h2>
+    <h3 class="invisible">Attempts: <span id="attempts"></span> / Phrases: <span id="phrases"></span></h3>
+    <div id="messageBox" class="alert" style="display:none"></div>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">{{ firstLanguage }}</div>
+            <div class="col-sm-10">
+                <div id="question" class="form-control-static"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="answer">{{ secondLanguage }}</label>
+            <div class="col-sm-10">
+                <input id="answer" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div id="remark" class="col-sm-10"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% javascripts '@AKWordLearnerBundle/Resources/public/js/quiz.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            window.WLQuiz.init({
+                baseUrl: "{% if app.debug %}/app_dev.php{% endif %}/quiz/phrases/",
+                chapter: {{ chapter.id }},
+                reversed: {{ reversed }}
+            });
+            window.WLQuiz.start();
+        });
+    </script>
+{% endblock %}
